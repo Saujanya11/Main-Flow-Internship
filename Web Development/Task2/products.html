@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="product.css"> <!-- Link to CSS file -->
+</head>
+<body>
+    <header>
+        <div class="logo">Products</div>
+        <nav>
+            <ul>
+                <li><a href="Ecommerce page.html">Home</a></li>
+                <li><a href="About.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="carts.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="product-container">
+        <div class="image-gallery">
+            <img src="Images/Tablet1.jpeg" alt="Product Image" class="main-image" id="main-image">
+            <div class="thumbnails">
+                <img src="Images/Tablet1.jpeg" alt="Thumbnail 1" onclick="changeImage(this)">
+                <img src="Images/Tablet2.jpeg" alt="Thumbnail 2" onclick="changeImage(this)">
+                <img src="Images/Tablet3.jpg" alt="Thumbnail 3" onclick="changeImage(this)">
+            </div>
+        </div>
+
+        <div class="product-details">
+            <h1 id="product-title">HONOR Pad 9</h1>
+            <p class="price" id="product-price">$299.99</p>
+            <p class="description">Premium electronic product with outstanding features.</p>
+            
+            <!-- Choose a variant -->
+            <label for="variants">Choose a variant:</label>
+            <select id="variants" onchange="updateVariant()">
+                <option value="299.99" data-image="Images/Tablet1.jpeg">64GB - Black</option>
+                <option value="329.99" data-image="Images/Tablet1.jpeg">128GB - Blue</option>
+            </select>
+
+            <div class="quantity-section">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" value="1" min="1">
+                <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+            </div>
+            <button class="wishlist">❤️ Wishlist</button>
+
+            <div class="customer-reviews">
+                <h2>Customer Reviews</h2>
+                <div class="review">
+                    <strong>User 1</strong>
+                    <p>⭐⭐⭐⭐⭐ - Great product!</p>
+                </div>
+                <div class="review">
+                    <strong>User 2</strong>
+                    <p>⭐⭐⭐⭐ - Satisfied with the purchase.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 My Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Cart array to store cart items
+        let cart = [];
+
+        function addToCart() {
+            const title = document.getElementById("product-title").innerText;
+            const price = parseFloat(document.getElementById("product-price").innerText.replace('$', ''));
+            const quantity = parseInt(document.getElementById("quantity").value);
+            const variant = document.getElementById("variants").selectedOptions[0].text;
+
+            // Create an item object
+            const item = {
+                name: `${title} (${variant})`,
+                price: price,
+                quantity: quantity,
+                image: document.getElementById("main-image").src // Use the currently displayed image
+            };
+
+            // Check if the item is already in the cart
+            const existingItem = cart.find(cartItem => cartItem.name === item.name);
+            if (existingItem) {
+                existingItem.quantity += quantity; // Update quantity if the item exists
+            } else {
+                cart.push(item); // Add the new item to the cart
+            }
+
+            // Optionally alert the user or log the cart for verification
+            alert(`${item.name} has been added to your cart.`);
+            console.log(cart); // For debugging
+        }
+
+        function updateVariant() {
+            const variantSelect = document.getElementById("variants");
+            const selectedVariant = variantSelect.options[variantSelect.selectedIndex];
+            const price = selectedVariant.value;
+            const image = selectedVariant.getAttribute("data-image");
+
+            // Update price display
+            document.getElementById("product-price").innerText = `$${price}`;
+
+            // Update main image
+            document.getElementById("main-image").src = image;
+        }
+
+        function changeImage(thumbnail) {
+            document.getElementById("main-image").src = thumbnail.src;
+        }
+    </script>
+</body>
+</html>

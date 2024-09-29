@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Buy high-quality electronics at affordable prices." />
+    <title>E-commerce Product Page</title>
+    <link rel="stylesheet" href="Ecommerce.css" />
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">E-Shop</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="Ecommerce page.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="carts.html">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Product Section -->
+    <section class="product-section">
+        <div class="container">
+            <!-- Product Image and Gallery -->
+            <div class="product-gallery">
+                <img id="mainImage" src="Images/Tablet1.jpeg" alt="Main Product Image" />
+                <div class="gallery-thumbnails">
+                    <img onclick="changeImage(this)" src="Images/Tablet2.jpeg" alt="Product Thumbnail 1" />
+                    <img onclick="changeImage(this)" src="Images/Tablet3.jpg" alt="Product Thumbnail 2" />
+                    <img onclick="changeImage(this)" src="Images/Tablet4.jpg" alt="Product Thumbnail 3" />
+                </div>
+            </div>
+        
+            <!-- Product Details -->
+            <div class="product-details">
+                <p>HONOR Pad 9 with Free Bluetooth Keyboard, 12.1-Inch 2.5K Display, 8GB, 256GB Storage, Snapdragon 6 Gen 1 (4nm), 8 Speakers, Up-to 17 Hours, Android 13, WiFi Tablet, Metal Body, Gray</p>
+                <p class="price">$299.99</p>
+                <p class="description">This is a premium electronic product with outstanding features, ideal for tech enthusiasts. It comes with various customization options like storage and color.</p>
+
+                <!-- Product Variants -->
+                <label for="variants">Choose a variant:</label>
+                <select id="variants" onchange="updateVariant(this)">
+                    <option value="64gb-black">64GB - Black</option>
+                    <option value="128gb-blue">128GB - Blue</option>
+                </select>
+
+                <!-- Quantity Selector -->
+                <div class="quantity">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" />
+                </div>
+
+                <!-- Buttons -->
+                <div class="buttons">
+                    <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+                    <button class="buy-now" onclick="buyNow()">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Customer Reviews Section -->
+    <section class="reviews-section">
+        <div class="container">
+            <h3>Customer Reviews</h3>
+            <div class="review">
+                <h4>John Doe</h4>
+                <p>★★★★★</p>
+                <p>Excellent product, highly recommended!</p>
+            </div>
+            <div class="review">
+                <h4>Jane Smith</h4>
+                <p>★★★★☆</p>
+                <p>Good quality, but the price could be lower.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 E-Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Image Gallery -->
+    <script>
+        function changeImage(element) {
+            document.getElementById("mainImage").src = element.src;
+        }
+
+        function updateVariant(selectElement) {
+            const selectedVariant = selectElement.options[selectElement.selectedIndex].text;
+            alert(`You selected: ${selectedVariant}`);
+        }
+
+        function addToCart() {
+            const quantity = document.getElementById('quantity').value;
+            const variant = document.getElementById('variants').options[document.getElementById('variants').selectedIndex].text;
+            alert(`Added ${quantity} of ${variant} to cart.`);
+        }
+
+        function buyNow() {
+            const quantity = document.getElementById('quantity').value;
+            const variant = document.getElementById('variants').options[document.getElementById('variants').selectedIndex].text;
+            alert(`You are buying ${quantity} of ${variant}.`);
+        }
+    </script>
+</body>
+</html>

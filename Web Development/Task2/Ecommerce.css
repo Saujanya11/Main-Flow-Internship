@@ -1,0 +1,177 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.header .logo {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Main Product Section */
+.product-section {
+    display: flex; /* Use flexbox to align items */
+    padding: 2rem;
+    background-color: #fff;
+}
+
+.product-gallery {
+    flex: 1; /* Allow the gallery to take up some space */
+    max-width: 500px; /* Set maximum width */
+    margin-right: 2rem; /* Add margin to the right */
+}
+
+.product-gallery img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure images are block elements */
+    border-radius: 5px; /* Add slight rounding */
+}
+
+.gallery-thumbnails {
+    display: flex; /* Display thumbnails in a row */
+    gap: 10px; /* Space between thumbnails */
+    margin-top: 10px; /* Add some space above thumbnails */
+}
+
+.gallery-thumbnails img {
+    width: 80px; /* Set thumbnail width */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Indicate clickability */
+    border: 2px solid transparent; /* Default border */
+    transition: border-color 0.3s; /* Smooth transition for border */
+    border-radius: 5px; /* Add slight rounding */
+}
+
+.gallery-thumbnails img:hover {
+    border-color: #3498db; /* Change border color on hover */
+}
+
+.product-details {
+    flex: 2; /* Allow the details to take more space */
+    max-width: 400px; /* Limit max width */
+    display: flex;
+    flex-direction: column; /* Align details vertically */
+    justify-content: flex-start; /* Align to the top */
+}
+
+.product-details p {
+    font-size: 1rem; /* Set font size */
+    margin-bottom: 1rem; /* Add margin below paragraphs */
+}
+
+.price {
+    font-size: 1.5rem; /* Set price font size */
+    color: #e74c3c; /* Price color */
+    margin-bottom: 1rem; /* Add margin below price */
+}
+
+.description {
+    margin-bottom: 1.5rem; /* Add margin below description */
+}
+
+.quantity {
+    margin-bottom: 1.5rem; /* Add margin below quantity */
+}
+
+.buttons {
+    display: flex; /* Flexbox for buttons */
+    gap: 15px; /* Space between buttons */
+}
+
+.add-to-cart, .buy-now {
+    padding: 10px 20px; /* Add padding */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 1rem; /* Set font size */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.add-to-cart {
+    background-color: #3498db; /* Button color */
+    color: white; /* Text color */
+}
+
+.buy-now {
+    background-color: #e74c3c; /* Button color */
+    color: white; /* Text color */
+}
+
+.add-to-cart:hover, .buy-now:hover {
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+/* Reviews Section */
+.reviews-section {
+    padding: 2rem; /* Add padding */
+    background-color: #f4f4f4; /* Background color */
+}
+
+.review {
+    margin-bottom: 1.5rem; /* Space between reviews */
+    padding-bottom: 1rem; /* Padding below review */
+    border-bottom: 1px solid #ddd; /* Border below review */
+}
+
+.review h4 {
+    font-weight: bold; /* Bold font */
+}
+
+.review p {
+    margin: 0.5rem 0; /* Add margin */
+}
+
+/* Footer */
+.footer {
+    background-color: #333; /* Footer background color */
+    color: #fff; /* Footer text color */
+    padding: 1rem; /* Padding */
+    text-align: center; /* Center text */
+    margin-top: 2rem; /* Margin above footer */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-section {
+        flex-direction: column; /* Stack items vertically */
+        text-align: center; /* Center text */
+    }
+
+    .product-gallery {
+        margin: 0 0 2rem 0; /* Reset margins */
+        max-width: 100%; /* Allow full width */
+    }
+}

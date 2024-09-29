@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View items in your cart.">
+    <title>Your Cart - E-Shop</title>
+    <link rel="stylesheet" href="cart.css"> <!-- Include your CSS file -->
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">E-Shop</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="Ecommerce page.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be displayed here -->
+                <p>Your cart is empty.</p> <!-- Show empty cart message by default -->
+            </div>
+            <div class="total">
+                <h3>Total: <span id="total-price">$0.00</span></h3>
+            </div>
+            <div class="buttons">
+                <button onclick="checkout()">Checkout</button>
+                <button onclick="clearCart()">Clear Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 E-Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Cart Functionality -->
+    <script>
+        // Cart items (can be populated from localStorage or a database in a real application)
+        let cart = []; // Start with an empty cart
+
+        function displayCartItems() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = ''; // Clear previous items
+
+            // Check if the cart is empty
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>'; // Show empty cart message
+                document.getElementById('total-price').innerText = '$0.00'; // Update total
+                return; // Exit function
+            }
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('cart-item');
+
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div>
+                        <h4>${item.name}</h4>
+                        <p>Price: $${item.price.toFixed(2)}</p>
+                        <label for="quantity-${item.name.replace(/\s+/g, '-')}-input">Quantity:</label>
+                        <input type="number" id="quantity-${item.name.replace(/\s+/g, '-')}-input" 
+                               value="${item.quantity}" min="1" onchange="updateQuantity('${item.name}', this.value)">
+                        <p>Subtotal: $${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                `;
+                cartItemsDiv.appendChild(itemDiv);
+                total += item.price * item.quantity; // Add to total
+            });
+
+            document.getElementById('total-price').innerText = `$${total.toFixed(2)}`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Add items before proceeding to checkout.');
+            } else {
+                alert('Proceeding to checkout...');
+            }
+        }
+
+        function clearCart() {
+            // Clear the cart
+            cart.length = 0; // Empty the cart array
+            displayCartItems(); // Update the display
+        }
+
+        function updateQuantity(name, newQuantity) {
+            const existingItem = cart.find(cartItem => cartItem.name === name);
+            if (existingItem) {
+                existingItem.quantity = parseInt(newQuantity); // Update the quantity
+                displayCartItems(); // Refresh the cart display
+            }
+        }
+
+        // Function to add an item to the cart (for testing purposes)
+        function addToCart(item) {
+            // Check if the item is already in the cart
+            const existingItem = cart.find(cartItem => cartItem.name === item.name);
+            if (existingItem) {
+                existingItem.quantity += item.quantity; // Update quantity if item exists
+            } else {
+                cart.push(item); // Add new item to cart
+            }
+            displayCartItems(); // Update the display
+        }
+
+        // Test adding items through user interaction (this could be triggered by a button on the product page)
+        function testAddItems() {
+            // You can call this function to simulate adding items from a product page
+            addToCart({
+                name: '64GB - Black',
+                price: 299.99,
+                quantity: 1,
+                image: 'Images/Tablet1.jpeg'
+            });
+
+            addToCart({
+                name: '128GB - Blue',
+                price: 329.99,
+                quantity: 1,
+                image: 'Images/Tablet2.jpeg'
+            });
+        }
+
+        // Display cart items when the page loads
+        window.onload = displayCartItems; // Initially show empty cart
+    </script>
+</body>
+</html>
